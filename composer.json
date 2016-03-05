@@ -11,6 +11,7 @@
         }
     ],
     "require": {
+        "php": ">=5.4.0",
         "doctrine/orm": "2.4.*",
         "erdiko/core": "0.8.*"
     },
