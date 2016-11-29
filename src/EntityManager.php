@@ -15,7 +15,7 @@ class EntityManager
     public static function getEntityManager($db = null, $context = 'shared')
     {
         // Get db config info from file
-        $dbConfig = \Erdiko::getConfig("{$context}/database");
+        $dbConfig = \erdiko\core\Helper::getConfig("{$context}/database");
         if($db == null)
             $db = $dbConfig['default'];
         $dbParams = $dbConfig['connections'][$db];
