@@ -25,7 +25,7 @@ class EntityManager
         $dbParams['dbname'] = $dbParams['database'];
         $dbParams['user'] = $dbParams['username'];
 
-        $paths = array(APPROOT.$dbConfig['entities']);
+        $paths = array(ERDIKO_ROOT.$dbConfig['entities']);
         $isDevMode = isset($dbConfig['is_dev_mode']) ? (bool)$dbConfig['is_dev_mode'] : false;
         $config = \Doctrine\ORM\Tools\Setup::createAnnotationMetadataConfiguration($paths, $isDevMode);
         
