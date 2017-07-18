@@ -2,6 +2,8 @@
 
 set -e
 
+export PACKAGE
+
 # Run phpunit tests in relevant container(s)
 # If release branch do a full regression against php versions
 # @note perhaps we should do this for master as well
