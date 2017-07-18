@@ -1,14 +1,5 @@
 #!/bin/sh
 
-# Prep the container (php & zip needed to install composer)
-apt-get install -y php zip
-
-# Install composer
-cd ../
-wget https://raw.githubusercontent.com/Erdiko/docker/master/php/scripts/composer.sh
-chmod 770 composer.sh
-./composer.sh
-
 # Install erdiko
 composer create erdiko/erdiko erdiko --keep-vcs
 

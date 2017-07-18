@@ -3,7 +3,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: erdiko/docker-compose:1.11
+      - image: erdiko/docker-compose:php
     working_directory: /code
 
     environment:
