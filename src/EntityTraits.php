@@ -14,7 +14,7 @@ trait EntityTraits
 {
     /**
      * getEntityManager
-     * 
+     *
      * @param string $db, name of the db to connect to
      * @return \Doctrine\ORM\EntityManager $em
      */
@@ -32,6 +32,15 @@ trait EntityTraits
      */
     public function getRepository($entityName, $db = null)
     {
-        return \erdiko\doctrine\EntityManager::getEntityManager()->getRepository($entityName);
+        try {
+            return $this->getEntityManager($db)->getRepository($entityName);
+        } catch (MappingException $e) {
+            throw new \Exception("Entity $entityName not found.", $e->getCode(), $e);
+        } catch (ORMException $e) {
+            throw new \Exception("Invalid database configuration.", $e->getCode(), $e);
+        } catch (\Exception $e) {
+            throw new \Exception($e->getMessage(), $e->getCode(), $e);
+        }
     }
+
 }
