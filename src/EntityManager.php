@@ -18,24 +18,25 @@ class EntityManager
     public static function getEntityManager($db = null, $context = 'shared')
     {
         // Get db config info from file
-        $dbConfig = \erdiko\core\Helper::getConfig("database", $context);
+        $dbConfig = \erdiko\Helper::getConfig('local/database');
         if($db == null)
             $db = $dbConfig['default'];
         $dbParams = $dbConfig['connections'][$db];
         $dbParams['dbname'] = $dbParams['database'];
         $dbParams['user'] = $dbParams['username'];
 
-        $paths = array(ERDIKO_ROOT.$dbConfig['entities']);
+        $paths = array(APPROOT.$dbConfig['entities']);
+        error_log(print_r($paths, true));
         $isDevMode = isset($dbConfig['is_dev_mode']) ? (bool)$dbConfig['is_dev_mode'] : false;
         $config = \Doctrine\ORM\Tools\Setup::createAnnotationMetadataConfiguration($paths, $isDevMode);
-        
+
         // Create and return the entity manager
         return \Doctrine\ORM\EntityManager::create($dbParams, $config);
     }
 
     /**
      * Update a single record
-     * Convenience method to update a row.  
+     * Convenience method to update a row.
      * You should use the Doctrine EntityManager directly to take control of the Entity merge process.
      * @note do we need this?
      */

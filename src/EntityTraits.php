@@ -1,9 +1,9 @@
-<?php 
+<?php
 /**
  * EntityTraits
  *
  * Convenient db traits to be used with models and service models
- * 
+ *
  * @package     erdiko/doctrine
  * @copyright   2012-2017 Arroyo Labs, Inc. http://www.arroyolabs.com
  * @author      John Arroyo <john@arroyolabs.com>
@@ -42,5 +42,4 @@ trait EntityTraits
             throw new \Exception($e->getMessage(), $e->getCode(), $e);
         }
     }
-
 }
