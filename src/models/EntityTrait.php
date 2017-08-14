@@ -1,6 +1,6 @@
 <?php
 /**
- * EntityTraits
+ * EntityTrait
  *
  * Convenient db traits to be used with models and service models
  *
@@ -8,19 +8,25 @@
  * @copyright   2012-2017 Arroyo Labs, Inc. http://www.arroyolabs.com
  * @author      John Arroyo <john@arroyolabs.com>
  */
-namespace erdiko\doctrine;
+namespace erdiko\doctrine\models;
 
-trait EntityTraits 
+trait EntityTrait
 {
+    protected $entityManager = null;
+
+    public function __construct(\Doctrine\ORM\EntityManager $entityManager)
+    {
+        $this->entityManager = $entityManager;
+    }
+
     /**
      * getEntityManager
      *
-     * @param string $db, name of the db to connect to
      * @return \Doctrine\ORM\EntityManager $em
      */
-    public function getEntityManager($db = null)
+    public function getEntityManager()
     {
-        return \erdiko\doctrine\EntityManager::getEntityManager($db);
+        return $this->entityManager;
     }
 
     /**
@@ -30,10 +36,10 @@ trait EntityTraits
      * @param string $db, name of the db to connect to
      * @return \Doctrine\ORM\EntityRepository The repository class
      */
-    public function getRepository($entityName, $db = null)
+    public function getRepository($entityName)
     {
         try {
-            return $this->getEntityManager($db)->getRepository($entityName);
+            return $this->getEntityManager()->getRepository($entityName);
         } catch (MappingException $e) {
             throw new \Exception("Entity $entityName not found.", $e->getCode(), $e);
         } catch (ORMException $e) {

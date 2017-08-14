@@ -12,23 +12,19 @@ class EntityManager
 {
     /**
     * Get Doctrine entity manager
+    * @param array $config
     * @param string $db, default to the 'default' database in the config
-    * @param string 
     */
-    public static function getEntityManager($db = null, $context = 'shared')
+    public static function getEntityManager($dbConfig, $db = null)
     {
-        // Get db config info from file
-        $dbConfig = \erdiko\Helper::getConfig('local/database');
         if($db == null)
             $db = $dbConfig['default'];
         $dbParams = $dbConfig['connections'][$db];
         $dbParams['dbname'] = $dbParams['database'];
         $dbParams['user'] = $dbParams['username'];
 
-        $paths = array(APPROOT.$dbConfig['entities']);
-        error_log(print_r($paths, true));
-        $isDevMode = isset($dbConfig['is_dev_mode']) ? (bool)$dbConfig['is_dev_mode'] : false;
-        $config = \Doctrine\ORM\Tools\Setup::createAnnotationMetadataConfiguration($paths, $isDevMode);
+        $config = \Doctrine\ORM\Tools\Setup::createAnnotationMetadataConfiguration(
+            $dbConfig['meta']['entities'], $dbConfig['meta']['is_dev_mode']);
 
         // Create and return the entity manager
         return \Doctrine\ORM\EntityManager::create($dbParams, $config);
