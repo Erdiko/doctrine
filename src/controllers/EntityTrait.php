@@ -10,6 +10,11 @@
  */
 namespace erdiko\doctrine\controllers;
 
+/**
+ * Class EntityTrait
+ * @package erdiko\doctrine\controllers
+ * @deprecated
+ */
 trait EntityTrait
 {
     /**
